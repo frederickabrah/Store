@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML & AI Model Integrated Tools - SinisterX Store</title>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-dark: #1a1a2e;
+            --secondary-dark: #16213e;
+            --accent: #ff6b6b;
+            --text-dark: #e6e6e6;
+            --primary-light: #f5f5f7;
+            --secondary-light: #ffffff;
+            --text-light: #1a1a2e;
+            --shadow-dark: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            --shadow-light: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            background: var(--primary-dark);
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+            min-height: 100vh;
+        }
+
+        body.light-mode {
+            background: var(--primary-light);
+            color: var(--text-light);
+        }
+
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.5;
+            background: linear-gradient(45deg, #1a1a2e, #16213e);
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        header {
+            background: rgba(22, 33, 62, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(180deg);
+        }
+
+        main {
+            max-width: 1400px;
+            margin: 100px auto 0;
+            padding: 20px;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .tool-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-dark);
+        }
+
+        .tool-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .tool-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        .tool-description {
+            margin-bottom: 15px;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .tool-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        .tool-rating {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+
+        .star {
+            color: gold;
+        }
+
+        .buy-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            width: 100%;
+            font-size: 1.1rem;
+        }
+
+        .buy-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .features-list {
+            margin: 15px 0;
+            list-style: none;
+        }
+
+        .features-list li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .features-list i {
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-animation"></div>
+    
+    <header>
+        <div class="nav-container">
+            <div class="logo">SinisterX Store</div>
+            <button class="buy-btn" onclick="window.location.href='index.html'">Back to Home</button>
+            <button class="theme-toggle" id="themeToggle">
+                <i class='bx bx-moon'></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>ML/AI Model & Logic/Alogarithm Integrated Tools</h1>
+            <p>Cutting-edge machine learning and AI solutions to revolutionize your workflow</p>
+        </section>
+
+        <div class="tools-grid">
+            <div class="tool-card">
+                <img src="https://picsum.photos/2200/2000?random=7" alt="DeepLearn Studio - A comprehensive machine learning development environment with pre-trained model integration and automated feature engineering." class="tool-image">
+                <h3 class="tool-title">DeepLearn Studio</h3>
+                <p class="tool-description">Comprehensive machine learning development environment with pre-trained model integration and automated feature engineering.</p>
+                <div class="tool-rating">
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star-half star'></i>
+                </div>
+                <ul class="features-list">
+                    <li><i class='bx bx-check'></i> Pre-trained Model Library</li>
+                    <li><i class='bx bx-check'></i> Automated Feature Selection</li>
+                    <li><i class='bx bx-check'></i> Visualization Tools</li>
+                    <li><i class='bx bx-check'></i> GPU Acceleration</li>
+                </ul>
+                <div class="tool-price">$1990.99</div>
+                <button class="buy-btn" onclick="sendEmail('DeepLearn Studio')">Purchase Now</button>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://storage.googleapis.com/a1aa/image/d044803e-b073-4bc5-83b5-7b450abe9e9f.jpeg" alt="NeuralNet Forge - An advanced neural network design and training platform with real-time model performance monitoring and optimization." class="tool-image">
+                <h3 class="tool-title">NeuralNet Forge</h3>
+                <p class="tool-description">Advanced neural network design and training platform with real-time model performance monitoring and optimization.</p>
+                <div class="tool-rating">
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                </div>
+                <ul class="features-list">
+                    <li><i class='bx bx-check'></i> Custom Neural Architecture</li>
+                    <li><i class='bx bx-check'></i> Performance Metrics</li>
+                    <li><i class='bx bx-check'></i> Hyperparameter Tuning</li>
+                    <li><i class='bx bx-check'></i> Multi-GPU Support</li>
+                </ul>
+                <div class="tool-price">$2490.99</div>
+                <button class="buy-btn" onclick="sendEmail('NeuralNet Forge')">Order Now</button>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://picsum.photos/2200/2000?random=9" alt="AI Data Sentinel - An advanced data preprocessing and cleaning tool with AI-powered anomaly detection and feature engineering capabilities." class="tool-image">
+                <h3 class="tool-title">AI Data Sentinel</h3>
+                <p class="tool-description">Advanced data preprocessing and cleaning tool with AI-powered anomaly detection and feature engineering capabilities.</p>
+                <div class="tool-rating">
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bx-star star'></i>
+                </div>
+                <ul class="features-list">
+                    <li><i class='bx bx-check'></i> Automated Data Cleaning</li>
+                    <li><i class='bx bx-check'></i> Anomaly Detection</li>
+                    <li><i class='bx bx-check'></i> Smart Feature Generation</li>
+                    <li><i class='bx bx-check'></i> Multi-format Support</li>
+                </ul>
+                <div class="tool-price">$1290.99</div>
+                <button class="buy-btn" onclick="sendEmail('AI Data Sentinel')">Order Now</button>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://picsum.photos/2200/2000?random=10" alt="ModelSync Enterprise - A collaborative AI model management platform with version control, deployment pipelines, and model performance tracking." class="tool-image">
+                <h3 class="tool-title">ModelSync Enterprise</h3>
+                <p class="tool-description">Collaborative AI model management platform with version control, deployment pipelines, and model performance tracking.</p>
+                <div class="tool-rating">
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star-half star'></i>
+                </div>
+                <ul class="features-list">
+                    <li><i class='bx bx-check'></i> Model Version Control</li>
+                    <li><i class='bx bx-check'></i> Deployment Automation</li>
+                    <li><i class='bx bx-check'></i> Performance Monitoring</li>
+                    <li><i class='bx bx-check'></i> Team Collaboration</li>
+                </ul>
+                <div class="tool-price">$2990.99</div>
+                <button class="buy-btn" onclick="sendEmail('ModelSync Enterprise')">Order Now</button>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://picsum.photos/2200/2000?random=11" alt="AIGenesis - An AI-powered code generation and completion tool with support for multiple programming languages and intelligent context understanding." class="tool-image">
+                <h3 class="tool-title">AIGenesis</h3>
+                <p class="tool-description">AI-powered code generation and completion tool with support for multiple programming languages and intelligent context understanding.</p>
+                <div class="tool-rating">
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bx-star star'></i>
+                </div>
+                <ul class="features-list">
+                    <li><i class='bx bx-check'></i> Multi-language Support</li>
+                    <li><i class='bx bx-check'></i> Context-aware Completion</li>
+                    <li><i class='bx bx-check'></i> Code Optimization</li>
+                    <li><i class='bx bx-check'></i> Plugin Ecosystem</li>
+                </ul>
+                <div class="tool-price">$790.99</div>
+                <button class="buy-btn" onclick="sendEmail('AIGenesis')">Order Now</button>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://picsum.photos/2200/2000?random=12" alt="Predictive Insights Pro - An advanced predictive analytics platform with machine learning algorithms for business intelligence and forecasting." class="tool-image">
+                <h3 class="tool-title">Predictive Insights Pro</h3>
+                <p class="tool-description">Advanced predictive analytics platform with machine learning algorithms for business intelligence and forecasting.</p>
+                <div class="tool-rating">
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star-half star'></i>
+                </div>
+                <ul class="features-list">
+                    <li><i class='bx bx-check'></i> Predictive Modeling</li>
+                    <li><i class='bx bx-check'></i> Time Series Analysis</li>
+                    <li><i class='bx bx-check'></i> Business Intelligence</li>
+                    <li><i class='bx bx-check'></i> Custom Dashboards</li>
+                </ul>
+                <div class="tool-price">$2590.99</div>
+                <button class="buy-btn" onclick="sendEmail('Predictive Insights Pro')">Order Now</button>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://picsum.photos/2200/2000?random=13" alt="VisionAI Suite - A comprehensive computer vision toolkit with pre-trained models for object detection, image classification, and more." class="tool-image">
+                <h3 class="tool-title">AuraVintage</h3>
+                <p class="tool-description">Comprehensive computer vision toolkit with pre-trained models for object detection, image classification, and more.</p>
+                <div class="tool-rating">
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bx-star star'></i>
+                </div>
+                <ul class="features-list">
+                    <li><i class='bx bx-check'></i> Object Detection</li>
+                    <li><i class='bx bx-check'></i> Image Classification</li>
+                    <li><i class='bx bx-check'></i> Facial Recognition</li>
+                    <li><i class='bx bx-check'></i> Video Analysis</li>
+                </ul>
+                <div class="tool-price">$899.99</div>
+                <button class="buy-btn" onclick="sendEmail('VisionAI Suite')">Order Now</button>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://picsum.photos/2200/2000?random=14" alt="SpeechAI Pro - An advanced speech recognition and synthesis tool with support for multiple languages and real-time processing." class="tool-image">
+                <h3 class="tool-title">WebCraft Pro</h3>
+                <p class="tool-description">Advanced Sophisticated CLI tools for HTML web dev developers to Generate Styled and animated CSS file base on your HTML Code this tool uses advanced Machine Learning model trained with large dataset.</p>
+                <div class="tool-rating">
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star-half star'></i>
+                </div>
+                <ul class="features-list">
+                    <li><i class='bx bx-check'></i> Multi-language Support</li>
+                    <li><i class='bx bx-check'></i> Real-time Processing</li>
+                    <li><i class='bx bx-check'></i> High Accuracy</li>
+                    <li><i class='bx bx-check'></i> Custom Voice Models</li>
+                </ul>
+                <div class="tool-price">$399.99</div>
+                <button class="buy-btn" onclick="sendEmail('SpeechAI Pro')">Order Now</button>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://picsum.photos/2200/2000?random=15" alt="RoboAI Framework - A robust framework for developing and deploying AI-powered robotic systems with real-time control and monitoring." class="tool-image">
+                <h3 class="tool-title">Custom building</h3>
+                <p class="tool-description">Decribe your ML & AI type od tool wnd integratiyour team specialized in Model building and ML will get to work
+                </div>
+               </div>
+                      </main>
+
+<script>
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            const icon = themeToggle.querySelector('i');
+            if (body.classList.contains('light-mode')) {
+                icon.classList.remove('bx-moon');
+                icon.classList.add('bx-sun');
+            } else {
+                icon.classList.remove('bx-sun');
+                icon.classList.add('bx-moon');
+            }
+        });
+
+        // Add smooth scroll animation for cards
+        const cards = document.querySelectorAll('.tool-card');
+        window.addEventListener('scroll', () => {
+            cards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                if (cardTop < windowHeight * 0.8) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }
+            });
+        });
+    </script>
+    
+    <script>
+   function sendEmail(toolName) {
+            window.location.href = `mailto:frederickabraham547@gmail.com?subject=${encodeURIComponent(toolName)}&body=I%20am%20interested%20in%20purchasing%20the%20${encodeURIComponent(toolName)}.`;
+        }
+  </script>
+</body>
+</html>

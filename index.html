@@ -1,0 +1,403 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>SinisterX Store</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f7fafc;
+            color: #4a5568;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .dark-mode {
+            background-color: #2d3748;
+            color: #e2e8f0;
+        }
+        nav {
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 16px;
+            transition: background-color 0.3s;
+        }
+        .dark-mode nav {
+            background-color: #1a202c;
+        }
+        nav a {
+            color: #4a5568;
+            text-decoration: none;
+            margin: 0 16px;
+            transition: color 0.3s;
+        }
+        .dark-mode nav a {
+            color: #e2e8f0;
+        }
+        nav a:hover {
+            color: #2d3748;
+        }
+        .dark-mode nav a:hover {
+            color: #cbd5e0;
+        }
+        header {
+            position: relative;
+            background-color: #2d3748;
+            color: white;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        header img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.5;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        header p {
+            margin-top: 16px;
+        }
+        header a {
+            margin-top: 24px;
+            background-color: #3182ce;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+        }
+        header a:hover {
+            background-color: #2b6cb0;
+        }
+        section {
+            padding: 48px 16px;
+            max-width: 1200px;
+            margin: auto;
+        }
+        h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 32px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 16px;
+        }
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: transform 0.5s, opacity 0.5s;
+        }
+        .dark-mode .card {
+            background-color: #1a202c;
+        }
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .card h3 {
+            font-size: 1.5rem;
+            margin: 16px;
+        }
+        .card p {
+            margin: 0 16px 16px;
+            color: #718096;
+        }
+        .dark-mode .card p {
+            color: #a0aec0;
+        }
+        .card a {
+            display: block;
+            background-color: #3182ce;
+            color: white;
+            padding: 12px 16px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 50px;
+            margin: 0 16px 16px;
+        }
+        .card a:hover {
+            background-color: #2b6cb0;
+        }
+        footer {
+            background-color: #2d3748;
+            color: white;
+            padding: 32px 16px;
+            text-align: center;
+        }
+        footer a {
+            color: #cbd5e0;
+            text-decoration: none;
+            margin: 0 8px;
+        }
+        footer a:hover {
+            color: white;
+        }
+        form {
+            max-width: 600px;
+            margin: auto;
+            background-color: white;
+            padding: 32px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .dark-mode form {
+            background-color: #1a202c;
+        }
+        form input, form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+        }
+        .dark-mode form input, .dark-mode form textarea {
+            background-color: #2d3748;
+            color: #e2e8f0;
+            border: 1px solid #4a5568;
+        }
+        form button {
+            background-color: #3182ce;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            width: 100%;
+        }
+        form button:hover {
+            background-color: #2b6cb0;
+        }
+        .dark-mode form button {
+            background-color: #2b6cb0;
+        }
+        .dark-mode form button:hover {
+            background-color: #3182ce;
+        }
+        .toggle-icon {
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #3182ce;
+        }
+        .dark-mode .toggle-icon {
+            color: #e2e8f0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Toggle Icon for Dark Mode -->
+    <i class="fas fa-moon toggle-icon" onclick="toggleDarkMode()"></i>
+    <!-- Navigation Bar -->
+    <nav>
+        <div>
+            <a href="#">SinisterX Store</a>
+            <a href="#">Home</a>
+            <a href="#">Browse Tools</a>
+            <a href="#">Categories</a>
+            <a href="#">About Us</a>
+            <a href="#">Contact</a>
+            <a href="#">FAQ</a>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <header>
+        <img alt="Background image of a futuristic digital interface" height="400" src="https://storage.googleapis.com/a1aa/image/fYhPeX21Oat7t0di9ZGhhEwBEkiEGpeMBEpLKV4OeRSx33jPB.jpg" width="1200"/>
+        <div>
+            <h1>Explore Innovative Tools for Developers and Creators</h1>
+            <p>Discover a wide range of software and source code products</p>
+            <a href="#">Browse All Tools</a>
+        </div>
+    </header>
+    <!-- Product Showcase -->
+    <section>
+        <h2>Featured Tools</h2>
+        <div class="grid">
+            <div class="card">
+                <img alt="Screenshot of AI Video Editor tool interface" height="200" src="https://storage.googleapis.com/a1aa/image/OKTRMUMD0Q6pC9jecfZ7Sw2z0oxBNgZTX0oGSLGvJMlKe7xnA.jpg" width="300"/>
+                <h3>AI Video Editor</h3>
+                <p>A powerful tool for editing and enhancing your videos with AI.</p>
+                <a href="#">Buy Now</a>
+            </div>
+            <div class="card">
+                <img alt="Screenshot of Ethical Hacking tool interface" height="200" src="https://storage.googleapis.com/a1aa/image/wSrz8uI3jGrPA5fGLWvQOFdVij9EePKvhtljBfkbJTmR87xnA.jpg" width="300"/>
+                <h3>Ethical Hacking Tool</h3>
+                <p>A comprehensive suite for ethical hacking and penetration testing.</p>
+                <a href="#">Buy Now</a>
+            </div>
+            <div class="card">
+                <img alt="Screenshot of Stop Motion Animation tool interface" height="200" src="https://storage.googleapis.com/a1aa/image/baNpvCwuEgakBl2XYJiePSaj8OyvcjvAo2qhA6OfbMPJe7xnA.jpg" width="300"/>
+                <h3>Stop Motion Animation Tool</h3>
+                <p>Create stunning stop motion animations with ease.</p>
+                <a href="#">Buy Now</a>
+            </div>
+        </div>
+    </section>
+    <!-- Categories Page -->
+    <section>
+        <h2>Categories</h2>
+        <div class="grid">
+            <div class="card">
+                <img alt="Icon representing Browser Extensions category" height="200" src="https://storage.googleapis.com/a1aa/image/ZBlPJdk0jT5fBafGfAVny6VdPQv2AvQf6i8eKBKiebpyfe94TA.jpg" width="300"/>
+                <h3>Browser Extensions</h3>
+                <p>Productivity, Security, Design, Entertainment</p>
+                <a href="browserexte.html">Explore</a>
+            </div>
+            <div class="card">
+                <img alt="Icon representing Hacking Tools category" height="200" src="https://storage.googleapis.com/a1aa/image/DFhjFz5C7Qo5INffTt4xkvbKvr0xyqV5vWGg8ffKnGzr33jPB.jpg" width="300"/>
+                <h3>Hacking Tools</h3>
+                <p>Ethical Hacking, Penetration Testing, Network Security</p>
+                <a href="hacking.html">Explore</a>
+            </div>
+            <div class="card">
+                <img alt="Icon representing ML & AI model integrated tools" height="200" src="https://storage.googleapis.com/a1aa/image/be4df978-29e0-4f01-9691-386a29d24bb2.jpeg" width="300"/>
+                <h3>ML & AI model integrated tools</h3>
+                <p>Advanced tools integrated with machine learning and AI models.</p>
+                <a href="mlandai.html">Explore</a>
+            </div>
+            <div class="card">
+                <img alt="Icon representing Android App Source Codes category" height="200" src="https://storage.googleapis.com/a1aa/image/TLGAzP2CVt7eeEaanTbFyQ3iUOmnnnvSIovfXSJmiA8M87xnA.jpg" width="300"/>
+                <h3>Android App Source Codes</h3>
+                <p>Source codes for various Android applications.</p>
+                <a href="#">Explore</a>
+            </div>
+            <div class="card">
+                <img alt="Icon representing Malware Source Codes category" height="200" src="https://storage.googleapis.com/a1aa/image/H1maIMH9bxKvNlzfB7XGGjQcgLFFjroF9wsjqeJITnxEe7xnA.jpg" width="300"/>
+                <h3>Malware Source Codes</h3>
+                <p>Source codes for various malware and security tools.</p>
+                <a href="#">Explore</a>
+            </div>
+            <div class="card">
+                <img alt="Icon representing Website Source Codes category" height="200" src="https://storage.googleapis.com/a1aa/image/7fBR5jNfR2lBlUcf6LlNgdiijeygNK6nTfz0ANRIRfoqgfe4TA.jpg" width="300"/>
+                <h3>Website Source Codes</h3>
+                <p>Source codes for various website projects.</p>
+                <a href="websource.html">Explore</a>
+            </div>
+            <div class="card">
+                <img alt="Icon representing Telegram Bots category" height="400" src="https://storage.googleapis.com/a1aa/image/0589a151-12ff-424a-8ffe-b4f37888f3f5.jpeg" width="1200"/>
+                <h3>Telegram Bots</h3>
+                <p>Automate tasks and enhance your Telegram experience with bots.</p>
+                <a href="telebots.html"><i class="fab fa-telegram-plane"></i> Explore</a>
+            </div>
+        </div>
+    </section>
+    <!-- Individual Product Page Example -->
+    <section>
+        <div class="card">
+            <img alt="Detailed screenshot of AI Video Editor tool interface" height="400" src="https://storage.googleapis.com/a1aa/image/kPQn7XxM4HoGJNHxUehbR56GTtVasEjndJte26ZrHPlFe7xnA.jpg" width="1200"/>
+            <div>
+                <h2>AI Video Editor</h2>
+                <p>A powerful tool for editing and enhancing your videos with AI. Features include automatic scene detection, color correction, and more.</p>
+                <p>Price: $49.99</p>
+                <a href="mailto: sinisterxcompltd@gmail.com?subject=AI%20Video%20Editor&body=I%20am%20interested%20in%20purchasing%20the%20AI%20Video%20Editor.">Buy Now</a>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer>
+        <div>
+            <h3>SinisterX Store</h3>
+            <p>Contact us at: info@sinisterxstore.com</p>
+        </div>
+        <div>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+        <div>
+            <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+        </div>
+    </footer>
+    <!-- Contact Page -->
+    <section>
+        <h2>Contact Us</h2>
+        <form
+        action="https://formspree.io/f/xkgnakno"
+        method="post">
+            <div>
+                <label for="name">Name</label>
+                <input id="name" type="text" required/>
+            </div>
+            <div>
+                <label for="email">Email</label>
+                <input id="email" type="email" required/>
+            </div>
+            <div>
+                <label for="message">Message</label>
+                <textarea id="message" required></textarea>
+            </div>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+    <!-- About Us Page -->
+    <section>
+        <h2>About Us</h2>
+        <form>
+        <div>
+            <p>SinisterX Store is dedicated to providing innovative tools for developers and creators. Our mission is to empower individuals and teams with the best software and source code products available. We strive to offer high-quality, reliable, and easy-to-use tools that help you achieve your goals.</p>
+            </div>
+            </form>
+           </section>
+          <section>
+            <h2>Why Choose Us</h2>
+            <form>
+            <div>
+            <ul>
+                <li>Wide range of products</li>
+                <li>High-quality and reliable tools</li>
+                <li>Excellent customer support</li>
+                <li>Competitive pricing</li>
+            </ul>
+        </div>
+        </form>
+    </section>
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const icon = document.querySelector('.toggle-icon');
+            if (document.body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        }
+
+        function sendEmail(toolName) {
+            window.location.href = `mailto: sinisterxcompltd@gmail.com?subject=${encodeURIComponent(toolName)}&body=I%20am%20interested%20in%20purchasing%20the%20${encodeURIComponent(toolName)}.`;
+        }
+
+        document.addEventListener('scroll', function() {
+            const cards = document.querySelectorAll('.card');
+            const windowHeight = window.innerHeight;
+            cards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                if (cardTop < windowHeight - 100) {
+                    card.style.transform = 'translateY(0)';
+                    card.style.opacity = '1';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Android Apps - SinisterX Store</title>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-dark: #1a1a2e;
+            --secondary-dark: #16213e;
+            --accent: #ff6b6b;
+            --text-dark: #e6e6e6;
+            --primary-light: #f5f5f7;
+            --secondary-light: #ffffff;
+            --text-light: #1a1a2e;
+            --shadow-dark: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            --shadow-light: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            background: var(--primary-dark);
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+            min-height: 100vh;
+        }
+
+        header {
+            background: rgba(22, 33, 62, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        main {
+            max-width: 1400px;
+            margin: 100px auto 0;
+            padding: 20px;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .tool-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-dark);
+        }
+
+        .tool-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .tool-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        .tool-description {
+            margin-bottom: 15px;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .tool-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        .buy-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            width: 100%;
+            font-size: 1.1rem;
+        }
+
+        .buy-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .features-list {
+            margin: 15px 0;
+            list-style: none;
+        }
+
+        .features-list li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .features-list i {
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">SinisterX Store</div>
+        <button class="buy-btn" onclick="window.location.href='index.html'">Back to Home</button>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Android Apps Building</h1>
+            <p>Powerful and innovative mobile applications for every need</p>
+        </section>
+
+        <div class="tools-grid">
+            <div class="tool-card">
+                <img src="https://picsum.photos/2200/2000?random=1" alt="ShopEase" class="tool-image">
+                <h3 class="tool-title">ShopEase</h3>
+                <p class="tool-description">A fully functional e-commerce app with comprehensive shopping features.</p>
+                <ul class="features-list">
+                    <li><i class='bx bx-check'></i> User Authentication</li>
+                    <li><i class='bx bx-check'></i> Product Categories</li>
+                    <li><i class='bx bx-check'></i> Payment Gateway Integration</li>
+                    <li><i class='bx bx-check'></i> Order Tracking</li>
+                </ul>
+                <div class="tool-price">$1900.99</div>
+                <button class="buy-btn" onclick="sendEmail('ShopEase')">Purchase Now</button>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://picsum.photos/2200/2000?random=2" alt="FoodDash" class="tool-image">
+                <h3 class="tool-title">FoodDash</h3>
+                <p class="tool-description">Connecting customers, restaurants, and delivery personnel seamlessly.</p>
+                <ul class="features-list">
+                    <li><i class='bx bx-check'></i> GPS Restaurant Search</li>
+                    <li><i class='bx bx-check'></i> Real-time Order Tracking</li>
+                    <li><i class='bx bx-check'></i> Multiple Payment Options</li>
+                    <li><i class='bx bx-check'></i> Delivery Notifications</li>
+                </ul>
+                <div class="tool-price">$1400.99</div>
+                <button class="buy-btn" onclick="sendEmail('FoodDash')">Order Now</button>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://picsum.photos/2200/2000?random=3" alt="FitBuddy" class="tool-image">
+                <h3 class="tool-title">FitBuddy</h3>
+                <p class="tool-description">Your personal health and fitness companion with advanced tracking.</p>
+                <ul class="features-list">
+                    <li><i class='bx bx-check'></i> Step Tracking</li>
+                    <li><i class='bx bx-check'></i> Personalized Workout Plans</li>
+                    <li><i class='bx bx-check'></i> Progress Charts</li>
+                    <li><i class='bx bx-check'></i> Social Sharing</li>
+                </ul>
+                <div class="tool-price">$900.99</div>
+                <button class="buy-btn" onclick="sendEmail('FitBuddy')">Order Now</button>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://picsum.photos/2200/2000?random=4" alt="Connectly" class="tool-image">
+                <h3 class="tool-title">Connectly</h3>
+                <p class="tool-description">A modern social networking app for connecting and sharing.</p>
+                <ul class="features-list">
+                    <li><i class='bx bx-check'></i> User Profiles</li>
+                    <li><i class='bx bx-check'></i> In-app Messaging</li>
+                    <li><i class='bx bx-check'></i> Content Sharing</li>
+                    <li><i class='bx bx-check'></i> Activity Notifications</li>
+                </ul>
+                <div class="tool-price">$1200.99</div>
+                <button class="buy-btn" onclick="sendEmail('Connectly')">Order Now</button>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://picsum.photos/2200/2000?random=5" alt="EduLearn" class="tool-image">
+                <h3 class="tool-title">EduLearn</h3>
+                <p class="tool-description">Your gateway to online learning with interactive courses.</p>
+                <ul class="features-list">
+                    <li><i class='bx bx-check'></i> Video Course Streaming</li>
+                    <li><i class='bx bx-check'></i> Interactive Quizzes</li>
+                    <li><i class='bx bx-check'></i> Downloadable Materials</li>
+                    <li><i class='bx bx-check'></i> Reminder Notifications</li>
+                </ul>
+                <div class="tool-price">$1600.99</div>
+                <button class="buy-btn" onclick="sendEmail('EduLearn')">Order Now</button>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://picsum.photos/2200/2000?random=6" alt="SpendWise" class="tool-image">
+                <h3 class="tool-title">SpendWise</h3>
+                <p class="tool-description">Manage your finances with intelligent expense tracking.</p>
+                <ul class="features-list">
+                    <li><i class='bx bx-check'></i> Expense Categorization</li>
+                    <li><i class='bx bx-check'></i> Budget Setting</li>
+                    <li><i class='bx bx-check'></i> Spending Trend Charts</li>
+                    <li><i class='bx bx-check'></i> Exportable Reports</li>
+                </ul>
+                <div class="tool-price">$700.99</div>
+                <button class="buy-btn" onclick="sendEmail('SpendWise')">Order Now</button>
+            </div>
+            
+          <div class="tool-card">
+                <img src="https://picsum.photos/2200/2000?random=7" alt="CareerFind" class="tool-image">
+                <h3 class="tool-title">CareerFind</h3>
+                <p class="tool-description">Your ultimate job search and application tracking companion.</p>
+                <ul class="features-list">
+                    <li><i class='bx bx-check'></i> Job Search with Filters</li>
+                    <li><i class='bx bx-check'></i> Resume Upload</li>
+                    <li><i class='bx bx-check'></i> Application Tracking</li>
+                    <li><i class='bx bx-check'></i> Job Match Notifications</li>
+                </ul>
+                <div class="tool-price">$1100.99</div>
+                <button class="buy-btn" onclick="sendEmail('CareerFind')">Order Now</button>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://picsum.photos/2200/2000?random=8" alt="CryptoSafe" class="tool-image">
+                <h3 class="tool-title">CryptoSafe</h3>
+                <p class="tool-description">Secure cryptocurrency wallet with advanced management features.</p>
+                <ul class="features-list">
+                    <li><i class='bx bx-check'></i> Wallet Creation</li>
+                    <li><i class='bx bx-check'></i> Real-time Price Tracking</li>
+                    <li><i class='bx bx-check'></i> QR Code Transactions</li>
+                    <li><i class='bx bx-check'></i> Biometric Security</li>
+                </ul>
+                <div class="tool-price">$5000.99</div>
+                <button class="buy-btn" onclick="sendEmail('CryptoSafe')">Order Now</button>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://picsum.photos/2200/2000?random=9" alt="Weatherly" class="tool-image">
+                <h3 class="tool-title">Weatherly</h3>
+                <p class="tool-description">Comprehensive weather forecasting at your fingertips.</p>
+                <ul class="features-list">
+                    <li><i class='bx bx-check'></i> Current Weather Conditions</li>
+                    <li><i class='bx bx-check'></i> Hourly Forecasts</li>
+                    <li><i class='bx bx-check'></i> Location-based Updates</li>
+                    <li><i class='bx bx-check'></i> Severe Weather Alerts</li>
+                </ul>
+                <div class="tool-price">$600.99</div>
+                <button class="buy-btn">Download</button>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://picsum.photos/2200/2000?random=10" alt="TaskIt" class="tool-image">
+                <h3 class="tool-title">TaskIt</h3>
+                <p class="tool-description">Boost your productivity with smart task management.</p>
+                <ul class="features-list">
+                    <li><i class='bx bx-check'></i> Task Categorization</li>
+                    <li><i class='bx bx-check'></i> Deadline Management</li>
+                    <li><i class='bx bx-check'></i> Reminder Notifications</li>
+                    <li><i class='bx bx-check'></i> Priority Drag-and-Drop</li>
+                </ul>
+                <div class="tool-price">$800.99</div>
+                <button class="buy-btn" onclick="sendEmail('Taskit')">Purchase Now</button>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://picsum.photos/2200/2000?random=11" alt="StreamPlay" class="tool-image">
+                <h3 class="tool-title">StreamPlay</h3>
+                <p class="tool-description">Your ultimate media streaming platform.</p>
+                <ul class="features-list">
+                    <li><i class='bx bx-check'></i> User Subscriptions</li>
+                    <li><i class='bx bx-check'></i> Video/Audio Streaming</li>
+                    <li><i class='bx bx-check'></i> Offline Playback</li>
+                    <li><i class='bx bx-check'></i> Playlist Creation</li>
+                </ul>
+                <div class="tool-price">$1000.99</div>
+                <button class="buy-btn" onclick="sendEmail('SreamPlay')">Order Now</button>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://picsum.photos/2200/2000?random=12" alt="HomeFinder" class="tool-image">
+                <h3 class="tool-title">HomeFinder</h3>
+                <p class="tool-description">Simplify your property search and management.</p>
+                <ul class="features-list">
+                    <li><i class='bx bx-check'></i> Property Search Filters</li>
+                    <li><i class='bx bx-check'></i> Agent Contact</li>
+                    <li><i class='bx bx-check'></i> Favorite Listings</li>
+                    <li><i class='bx bx-check'></i> Virtual Property Tours</li>
+                </ul>
+                <div class="tool-price">$1300.99</div>
+                <button class="buy-btn" onclick="sendEmail('Home Finder')">Order Now</button>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            const icon = themeToggle.querySelector('i');
+            if (body.classList.contains('light-mode')) {
+                icon.classList.remove('bx-moon');
+                icon.classList.add('bx-sun');
+            } else {
+                icon.classList.remove('bx-sun');
+                icon.classList.add('bx-moon');
+            }
+        });
+
+        // Add smooth scroll animation for cards
+        const cards = document.querySelectorAll('.tool-card');
+        window.addEventListener('scroll', () => {
+            cards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                if (cardTop < windowHeight * 0.8) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        function sendEmail(toolName) {
+            window.location.href = `mailto:frederickabraham547@gmail.com?subject=${encodeURIComponent(toolName)}&body=I%20am%20interested%20in%20purchasing%20a%20Project%20like%20the%20${encodeURIComponent(toolName)}%20app.`;
+        }
+    </script>
+</body>
+</html>

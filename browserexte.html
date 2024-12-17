@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browser Extensions - SinisterX Store</title>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-dark: #1a1a2e;
+            --secondary-dark: #16213e;
+            --accent: #ff6b6b;
+            --text-dark: #e6e6e6;
+            --primary-light: #f5f5f7;
+            --secondary-light: #ffffff;
+            --text-light: #1a1a2e;
+            --shadow-dark: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            --shadow-light: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            background: var(--primary-dark);
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+            min-height: 100vh;
+        }
+
+        body.light-mode {
+            background: var(--primary-light);
+            color: var(--text-light);
+        }
+
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.5;
+            background: linear-gradient(45deg, #1a1a2e, #16213e);
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        header {
+            background: rgba(22, 33, 62, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(180deg);
+        }
+
+        main {
+            max-width: 1400px;
+            margin: 100px auto 0;
+            padding: 20px;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .tool-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-dark);
+        }
+
+        .tool-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .tool-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        .tool-description {
+            margin-bottom: 15px;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .tool-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        .tool-rating {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+
+        .star {
+            color: gold;
+        }
+
+        .buy-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            width: 100%;
+            font-size: 1.1rem;
+        }
+
+        .buy-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .features-list {
+            margin: 15px 0;
+            list-style: none;
+        }
+
+        .features-list li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .features-list i {
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-animation"></div>
+    
+    <header>
+        <div class="nav-container">
+            <div class="logo">SinisterX Store</div>
+            <button class="buy-btn" onclick="window.location.href='index.html'">Back to Home</button>
+            <button class="theme-toggle" id="themeToggle">
+                <i class='bx bx-moon'></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Browser Extensions</h1>
+            <p>Enhance your browsing experience with our powerful and secure extensions</p>
+        </section>
+
+        <div class="tools-grid">
+            <div class="tool-card">
+                <img src="https://picsum.photos/2200/2000?random=1" alt="Tool 1" class="tool-image">
+                <h3 class="tool-title">Tool1: Privacy Guardian Pro</h3>
+                <p class="tool-description">Advanced privacy protection suite with built-in VPN, tracker blocker, and secure password manager.</p>
+                <div class="tool-rating">
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star-half star'></i>
+                </div>
+                <ul class="features-list">
+                    <li><i class='bx bx-check'></i> Built-in VPN Service</li>
+                    <li><i class='bx bx-check'></i> Advanced Tracker Blocking</li>
+                    <li><i class='bx bx-check'></i> Password Management</li>
+                    <li><i class='bx bx-check'></i> Real-time Protection</li>
+                </ul>
+                <div class="tool-price">$29.99</div>
+                <button class="buy-btn">Purchase Now</button>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://picsum.photos/2200/2000?random=2" alt="Tool 2" class="tool-image">
+                <h3 class="tool-title">Tool2: Developer's Toolkit Plus</h3>
+                <p class="tool-description">Complete development suite with code inspector, debugger, and performance analyzer.</p>
+                <div class="tool-rating">
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                </div>
+                <ul class="features-list">
+                    <li><i class='bx bx-check'></i> Advanced Code Inspector</li>
+                    <li><i class='bx bx-check'></i> Performance Analytics</li>
+                    <li><i class='bx bx-check'></i> Debug Console</li>
+                    <li><i class='bx bx-check'></i> Network Monitor</li>
+                </ul>
+                <div class="tool-price">$39.99</div>
+                <button class="buy-btn">Purchase Now</button>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://picsum.photos/2200/2000?random=3" alt="Tool 3" class="tool-image">
+                <h3 class="tool-title">Tool3: Social Media Manager Pro</h3>
+                <p class="tool-description">Comprehensive social media management tool with scheduling, analytics, and automation features.</p>
+                <div class="tool-rating">
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star-half star'></i>
+                </div>
+                <ul class="features-list">
+                    <li><i class='bx bx-check'></i> Multi-platform Support</li>
+                    <li><i class='bx bx-check'></i> Advanced Analytics</li>
+                    <li><i class='bx bx-check'></i> Automated Posting</li>
+                    <li><i class='bx bx-check'></i> Engagement Tracking</li>
+                </ul>
+                <div class="tool-price">$5</div>
+                <button class="buy-btn">Purchase Now</button>
+            </div>
+            
+            <div class="tool-card">
+    <img src="https://picsum.photos/2200/2000?random=4" alt="Image2ASCII" class="tool-image">
+    <h3 class="tool-title">Tool3: Image2ASCII Converter</h3>
+    <p class="tool-description">Transform your images into stunning ASCII art effortlessly with this extension.</p>
+    <div class="tool-rating">
+        <i class='bx bxs-star star'></i>
+        <i class='bx bxs-star star'></i>
+        <i class='bx bxs-star star'></i>
+        <i class='bx bxs-star star'></i>
+        <i class='bx bxs-star star'></i>
+    </div>
+    <ul class="features-list">
+        <li><i class='bx bx-check'></i> Fast and accurate image processing</li>
+        <li><i class='bx bx-check'></i> Customizable ASCII character sets</li>
+        <li><i class='bx bx-check'></i> Export ASCII art to text or images</li>
+    </ul>
+    <div class="tool-price">$5</div>
+    <button class="buy-btn">Purchase Now</button>
+</div>
+
+<div class="tool-card">
+    <img src="https://picsum.photos/2200/2000?random=5" alt="Advanced Proxy Management" class="tool-image">
+    <h3 class="tool-title">Tool4: Advanced Proxy Management</h3>
+    <p class="tool-description">Seamlessly configure and manage proxies to enhance privacy and performance.</p>
+    <div class="tool-rating">
+        <i class='bx bxs-star star'></i>
+        <i class='bx bxs-star star'></i>
+        <i class='bx bxs-star star'></i>
+        <i class='bx bxs-star star'></i>
+        <i class='bx bx-star star'></i>
+    </div>
+    <ul class="features-list">
+        <li><i class='bx bx-check'></i> Easy proxy configuration</li>
+        <li><i class='bx bx-check'></i> Support for multiple proxy types</li>
+        <li><i class='bx bx-check'></i> Real-time proxy performance monitoring</li>
+    </ul>
+    <div class="tool-price">$5</div>
+    <button 
+  class="buy-btn mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600" 
+  onclick="window.location.href='mailto:frederickabraham547@gmail.com?subject=Browser%20Extension%20Editor&body=I%20am%20interested%20in%20purchasing%20the%20Advance%20Proxy%20Management.'">
+  Purchase Now
+</button> 
+</div>
+
+<div class="tool-card">
+    <img src="https://picsum.photos/2200/2000?random=6" alt="XSS Protection" class="tool-image">
+    <h3 class="tool-title">Tool5: XSS Protection Suite</h3>
+    <p class="tool-description">Ensure secure browsing by preventing cross-site scripting attacks.</p>
+    <div class="tool-rating">
+        <i class='bx bxs-star star'></i>
+        <i class='bx bxs-star star'></i>
+        <i class='bx bxs-star star'></i>
+        <i class='bx bxs-star star'></i>
+        <i class='bx bx-star star'></i>
+    </div>
+    <ul class="features-list">
+        <li><i class='bx bx-check'></i> Real-time XSS detection</li>
+        <li><i class='bx bx-check'></i> Customizable security rules</li>
+        <li><i class='bx bx-check'></i> Comprehensive vulnerability reports</li>
+    </ul>
+    <div class="tool-price">$8</div>
+    <button 
+  class="buy-btn mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600" 
+  onclick="window.location.href='mailto:frederickabraham547@gmail.com?subject=Browser%20Extension%20Editor&body=I%20am%20interested%20in%20purchasing%20the%20XSS%20Protection%20Suite.'">
+  Purchase Now
+</button>
+</div>
+        </div>
+    </main>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            const icon = themeToggle.querySelector('i');
+            if (body.classList.contains('light-mode')) {
+                icon.classList.remove('bx-moon');
+                icon.classList.add('bx-sun');
+            } else {
+                icon.classList.remove('bx-sun');
+                icon.classList.add('bx-moon');
+            }
+        });
+
+        // Add smooth scroll animation for cards
+        const cards = document.querySelectorAll('.tool-card');
+        window.addEventListener('scroll', () => {
+            cards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                if (cardTop < windowHeight * 0.8) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }
+            });
+        });
+    </script>
+    
+    <script>
+   function sendEmail(toolName) {
+            window.location.href = `mailto:frederickabraham547@gmail.com?subject=${encodeURIComponent(toolName)}&body=I%20am%20interested%20in%20purchasing%20the%20${encodeURIComponent(toolName)}.`;
+        }
+  </script>
+</body>
+</html>

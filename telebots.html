@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Bots - SinisterX Store</title>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-dark: #1a1a2e;
+            --secondary-dark: #16213e;
+            --accent: #0088cc;
+            --text-dark: #e6e6e6;
+            --primary-light: #f5f5f7;
+            --secondary-light: #ffffff;
+            --text-light: #1a1a2e;
+            --shadow-dark: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            --shadow-light: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            background: var(--primary-dark);
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+            min-height: 100vh;
+        }
+
+        body.light-mode {
+            background: var(--primary-light);
+            color: var(--text-light);
+        }
+
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.5;
+            background: linear-gradient(45deg, #1a1a2e, #16213e);
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        header {
+            background: rgba(22, 33, 62, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(180deg);
+        }
+
+        main {
+            max-width: 1400px;
+            margin: 100px auto 0;
+            padding: 20px;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .tool-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-dark);
+        }
+
+        .tool-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .tool-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        .tool-description {
+            margin-bottom: 15px;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .tool-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        .tool-rating {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+
+        .star {
+            color: gold;
+        }
+
+        .buy-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            width: 100%;
+            font-size: 1.1rem;
+        }
+
+        .buy-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .features-list {
+            margin: 15px 0;
+            list-style: none;
+        }
+
+        .features-list li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .features-list i {
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-animation"></div>
+    
+    <header>
+        <div class="nav-container">
+            <div class="logo">SinisterX Store</div>
+            <button class="buy-btn" onclick="window.location.href='index.html'">Back to Home</button>
+            <button class="theme-toggle" id="themeToggle">
+                <i class='bx bx-moon'></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Telegram Bots</h1>
+            <p>Powerful and versatile Telegram bots to enhance your messaging experience</p>
+        </section>
+
+        <div class="tools-grid">
+            <div class="tool-card">
+                <img src="https://picsum.photos/2200/2000?random=1" alt="ModBot" class="tool-image">
+                <h3 class="tool-title">ModBot: Group Management</h3>
+                <p class="tool-description">Advanced group management bot with spam filtering, user controls, and automated moderation.</p>
+                <div class="tool-rating">
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star-half star'></i>
+                </div>
+                <ul class="features-list">
+                    <li><i class='bx bx-check'></i> User Bans and Mutes</li>
+                    <li><i class='bx bx-check'></i> Spam Detection</li>
+                    <li><i class='bx bx-check'></i> Customizable Welcome Messages</li>
+                    <li><i class='bx bx-check'></i> Keyword Alerts</li>
+                </ul>
+                <div class="tool-price">$15.99</div>
+                <button class="buy-btn" onclick="sendEmail('ModBot')">Purchase Now</button>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://picsum.photos/2200/2000?random=2" alt="ShopBot" class="tool-image">
+                <h3 class="tool-title">ShopBot: E-commerce Integration</h3>
+                <p class="tool-description">Seamless e-commerce bot with product display, order management, and payment processing.</p>
+                <div class="tool-rating">
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                </div>
+                <ul class="features-list">
+                    <li><i class='bx bx-check'></i> Product Catalog Display</li>
+                    <li><i class='bx bx-check'></i> Cart and Checkout</li>
+                    <li><i class='bx bx-check'></i> Payment Gateway Integration</li>
+                    <li><i class='bx bx-check'></i> Order Tracking</li>
+                </ul>
+                <div class="tool-price">$29.99</div>
+                <button class="buy-btn" onclick="sendEmail('ShopBot')">Purchase Now</button>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://picsum.photos/2200/2000?random=3" alt="DownLoaderX" class="tool-image">
+                <h3 class="tool-title">DownLoaderX: File Management</h3>
+                <p class="tool-description">Advanced file downloading bot with multi-platform support and file conversion capabilities.</p>
+                <div class="tool-rating">
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star-half star'></i>
+                </div>
+                <ul class="features-list">
+                    <li><i class='bx bx-check'></i> URL-based Downloading</li>
+                    <li><i class='bx bx-check'></i> File Conversion</li>
+                    <li><i class='bx bx-check'></i> Cloud Storage Integration</li>
+                    <li><i class='bx bx-check'></i> Multi-platform Support</li>
+                </ul>
+                <div class="tool-price">$19.99</div>
+                <button class="buy-btn" onclick="sendEmail('DownLoaderX')">Purchase Now</button>
+            </div>
+            
+            <div class="tool-card">
+                <img src="https://picsum.photos/2200/2000?random=4" alt="LearnBot" class="tool-image">
+                <h3 class="tool-title">LearnBot: Educational Assistant</h3>
+                <p class="tool-description">Interactive learning bot with quizzes, recommendations, and skill tracking.</p>
+                <div class="tool-rating">
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                </div>
+                <ul class="features-list">
+                    <li><i class='bx bx-check'></i> Quiz Functionality</li>
+                    <li><i class='bx bx-check'></i> Content Recommendations</li>
+                    <li><i class='bx bx-check'></i> Progress Tracking</li>
+                    <li><i class='bx bx-check'></i> Learning Analytics</li>
+                </ul>
+                <div class="tool-price">$9.99</div>
+                <button class="buy-btn" onclick="sendEmail('LearnBot')">Purchase Now</button>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://picsum.photos/2200/2000?random=5" alt="NewsFeedBot" class="tool-image">
+                <h3 class="tool-title">NewsFeedBot: Information Hub</h3>
+                <p class="tool-description">Personalized news aggregation bot with topic-based subscriptions and trending updates.</p>
+                <div class="tool-rating">
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bx-star star'></i>
+                </div>
+                <ul class="features-list">
+                    <li><i class='bx bx-check'></i> Topic Subscriptions</li>
+                    <li><i class='bx bx-check'></i> Scheduled News Delivery</li>
+                    <li><i class='bx bx-check'></i> Trending News Alerts</li>
+                    <li><i class='bx bx-check'></i> Multi-source Aggregation</li>
+                </ul>
+                <div class="tool-price">$7.99</div>
+                <button class="buy-btn" onclick="sendEmail('NewsFeedBot')">Purchase Now</button>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://picsum.photos/2200/2000?random=6" alt="TaskerBot" class="tool-image">
+                <h3 class="tool-title">TaskerBot: Productivity Assistant</h3>
+                <p class="tool-description">Comprehensive task management bot for personal and team productivity.</p>
+                <div class="tool-rating">
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bx-star star'></i>
+                </div>
+                <ul class="features-list">
+                    <li><i class='bx bx-check'></i> Task Creation</li>
+                    <li><i class='bx bx-check'></i> Deadline Reminders</li>
+                    <li><i class='bx bx-check'></i> Collaborative Task Management</li>
+                </ul>
+                <div class="tool-price">$12.99</div>
+                <button class="buy-btn" onclick="sendEmail('TaskerBot')">Purchase Now</button>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://picsum.photos/2200/2000?random=7" alt="CryptoBot" class="tool-image">
+                <h3 class="tool-title">CryptoBot: Cryptocurrency Tracker</h3>
+                <p class="tool-description">Real-time cryptocurrency tracking and portfolio management bot.</p>
+                <div class="tool-rating">
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star-half star'></i>
+                </div>
+                <ul class="features-list">
+                    <li><i class='bx bx-check'></i> Real-time Price Updates</li>
+                    <li><i class='bx bx-check'></i> Portfolio Tracking</li>
+                    <li><i class='bx bx-check'></i> Market Trend Alerts</li>
+                    <li><i class='bx bx-check'></i> Price Change Notifications</li>
+                </ul>
+                <div class="tool-price">$14.99</div>
+                <button class="buy-btn" onclick="sendEmail('CryptoBot')">Purchase Now</button>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://picsum.photos/2200/2000?random=8" alt="PollPro" class="tool-image">
+                <h3 class="tool-title">PollPro: Survey Management</h3>
+                <p class="tool-description">Advanced polling and survey creation bot for groups and channels.</p>
+                <div class="tool-rating">
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                </div>
+                <ul class="features-list">
+                    <li><i class='bx bx-check'></i> Multiple Poll Types</li>
+                    <li><i class='bx bx-check'></i> Results Analytics</li>
+                    <li><i class='bx bx-check'></i> Scheduled Polling</li>
+                    <li><i class='bx bx-check'></i> Engagement Tracking</li>
+                </ul>
+                <div class="tool-price">$9.99</div>
+                <button class="buy-btn" onclick="sendEmail('PollPro')">Purchase Now</button>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://picsum.photos/2200/2000?random=9" alt="PostScheduler" class="tool-image">
+                <h3 class="tool-title">PostScheduler: Content Management</h3>
+                <p class="tool-description">Powerful content scheduling and distribution bot for Telegram channels.</p>
+                <div class="tool-rating">
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bx-star star'></i>
+                </div>
+                <ul class="features-list">
+                    <li><i class='bx bx-check'></i> Time-based Scheduling</li>
+                    <li><i class='bx bx-check'></i> RSS Feed Integration</li>
+                    <li><i class='bx bx-check'></i> Performance Tracking</li>
+                    <li><i class='bx bx-check'></i> Multi-platform Sync</li>
+                </ul>
+                <div class="tool-price">$16.99</div>
+                <button class="buy-btn" onclick="sendEmail('PostScheduler')">Purchase Now</button>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://picsum.photos/2200/2000?random=10" alt="FunBot" class="tool-image">
+                <h3 class="tool-title">FunBot: Entertainment Hub</h3>
+                <p class="tool-description">Interactive entertainment bot with games, jokes, and engaging group activities.</p>
+                <div class="tool-rating">
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star-half star'></i>
+                </ul>
+                <ul class="features-list">
+                    <li><i class='bx bx-check'></i> Interactive Games</li>
+                    <li><i class='bx bx-check'></i> Random Jokes and Memes</li>
+                    <li><i class='bx bx-check'></i> Trivia Challenges</li>
+                    <li><i class='bx bx-check'></i> Group Competition Modes</li>
+                </ul>
+                <div class="tool-price">$7.99</div>
+                <button class="buy-btn" onclick="sendEmail('FunBot')">Purchase Now</button>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://picsum.photos/2200/2000?random=11" alt="SmartBot AI" class="tool-image">
+                <h3 class="tool-title">SmartBot AI: Intelligent Assistant</h3>
+                <p class="tool-description">AI-powered chatbot with advanced conversational and problem-solving capabilities.</p>
+                <div class="tool-rating">
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                </div>
+                <ul class="features-list">
+                    <li><i class='bx bx-check'></i> AI-driven Responses</li>
+                    <li><i class='bx bx-check'></i> External API Integration</li>
+                    <li><i class='bx bx-check'></i> Multilingual Support</li>
+                    <li><i class='bx bx-check'></i> Context-aware Interactions</li>
+                </ul>
+                <div class="tool-price">$24.99</div>
+                <button class="buy-btn" onclick="sendEmail('SmartBot AI')">Purchase Now</button>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://picsum.photos/2200/2000?random=12" alt="NetConnectBot" class="tool-image">
+                <h3 class="tool-title">NetConnectBot: Networking Assistant</h3>
+                <p class="tool-description">Professional networking bot for skill matching and connection opportunities.</p>
+                <div class="tool-rating">
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bx-star star'></i>
+                </div>
+                <ul class="features-list">
+                    <li><i class='bx bx-check'></i> Profile Creation</li>
+                    <li><i class='bx bx-check'></i> Skill Matching</li>
+                    <li><i class='bx bx-check'></i> Networking Event Planning</li>
+                    <li><i class='bx bx-check'></i> Professional Introductions</li>
+                </ul>
+                <div class="tool-price">$19.99</div>
+                <button class="buy-btn" onclick="sendEmail('NetConnectBot')">Purchase Now</button>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://picsum.photos/2200/2000?random=13" alt="VerifyBot" class="tool-image">
+                <h3 class="tool-title">VerifyBot: Security Management</h3>
+                <p class="tool-description">Advanced user verification and security bot for Telegram groups.</p>
+                <div class="tool-rating">
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star-half star'></i>
+                </div>
+                <ul class="features-list">
+                    <li><i class='bx bx-check'></i> CAPTCHA Verification</li>
+                    <li><i class='bx bx-check'></i> Two-Factor Authentication</li>
+                    <li><i class='bx bx-check'></i> Temporary Access Tokens</li>
+                    <li><i class='bx bx-check'></i> Spam Prevention</li>
+                </ul>
+                <div class="tool-price">$14.99</div>
+                <button class="buy-btn" onclick="sendEmail('VerifyBot')">Purchase Now</button>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://picsum.photos/2200/2000?random=14" alt="SubManager" class="tool-image">
+                <h3 class="tool-title">SubManager: Subscription Handler</h3>
+                <p class="tool-description">Comprehensive subscription management for channels and external services.</p>
+                <div class="tool-rating">
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                </div>
+                <ul class="features-list">
+                    <li><i class='bx bx-check'></i> Payment Processing</li>
+                    <li><i class='bx bx-check'></i> Renewal Notifications</li>
+                    <li><i class='bx bx-check'></i> Free Trial Management</li>
+                    <li><i class='bx bx-check'></i> Tier-based Subscriptions</li>
+                </ul>
+                <div class="tool-price">$21.99</div>
+                <button class="buy-btn" onclick="sendEmail('SubManager')">Purchase Now</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            const icon = themeToggle.querySelector('i');
+            if (body.classList.contains('light-mode')) {
+                icon.classList.remove('bx-moon');
+                icon.classList.add('bx-sun');
+            } else {
+                icon.classList.remove('bx-sun');
+                icon.classList.add('bx-moon');
+            }
+        });
+
+        // Add smooth scroll animation for cards
+        const cards = document.querySelectorAll('.tool-card');
+        window.addEventListener('scroll', () => {
+            cards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                if (cardTop < windowHeight * 0.8) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        function sendEmail(toolName) {
+            window.location.href = `mailto:frederickabraham547@gmail.com?subject=${encodeURIComponent(toolName)}&body=I%20am%20interested%20in%20purchasing%20the%20${encodeURIComponent(toolName)}.`;
+        }
+    </script>
+</body>
+</html>

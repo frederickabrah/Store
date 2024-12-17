@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website related Service - SinisterX Store</title>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-dark: #1a1a2e;
+            --secondary-dark: #16213e;
+            --accent: #ff6b6b;
+            --text-dark: #e6e6e6;
+            --primary-light: #f5f5f7;
+            --secondary-light: #ffffff;
+            --text-light: #1a1a2e;
+            --shadow-dark: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            --shadow-light: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            background: var(--primary-dark);
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+            min-height: 100vh;
+        }
+
+        body.light-mode {
+            background: var(--primary-light);
+            color: var(--text-light);
+        }
+
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.5;
+            background: linear-gradient(45deg, #1a1a2e, #16213e);
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        header {
+            background: rgba(22, 33, 62, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(180deg);
+        }
+
+        main {
+            max-width: 1400px;
+            margin: 100px auto 0;
+            padding: 20px;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .tool-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-dark);
+        }
+
+        .tool-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .tool-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        .tool-description {
+            margin-bottom: 15px;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .tool-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        .tool-rating {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+
+        .star {
+            color: gold;
+        }
+
+        .buy-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            width: 100%;
+            font-size: 1.1rem;
+        }
+
+        .buy-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .features-list {
+            margin: 15px 0;
+            list-style: none;
+        }
+
+        .features-list li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .features-list i {
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-animation"></div>
+    
+    <header>
+        <div class="nav-container">
+            <div class="logo">SinisterX Store</div>
+            <button class="buy-btn" onclick="window.location.href='index.html'">Back to Home</button>  
+            <button class="theme-toggle" id="themeToggle">
+                <i class='bx bx-moon'></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Websites services</h1>
+            <p>Beautiful and Animated website source code, Website creation</p>
+        </section>
+
+        <div class="tools-grid">
+            <div class="tool-card">
+                <img src="https://picsum.photos/2200/2000?random=6" alt="Tool 1" class="tool-image">
+                <h3 class="tool-title">Portfolio website creation</h3>
+                <p class="tool-description">Beautiful And animated portfolio website .</p>
+                <div class="tool-rating">
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star-half star'></i>
+                </div>
+                <ul class="features-list">
+                    <li><i class='bx bx-check'></i> Responsive design for all devices</li>
+                    <li><i class='bx bx-check'></i> Interactive section for project and testimonail</li>
+                    <li><i class='bx bx-check'></i> SEO-optimized for better visibility</li>
+                    <li><i class='bx bx-check'></i> Light and Dark theme options</li>
+                    <li><i class='bx bx-check'></i>Skills chart</li>
+                    <li><i class='bx bx-check'></i>Easy to Customize</li>
+                </ul>
+                <div class="tool-price">$50-100</div>
+                <button 
+  class="buy-btn mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600" 
+  onclick="window.location.href='mailto:frederickabraham547@gmail.com?subject=Web%20Service&body=I%20am%20interested%20in%20purchasing%20the%20Resume%20Website.'">Order Now</button>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://picsum.photos/2200/2000?random=7" alt="Tool 2" class="tool-image">
+                <h3 class="tool-title">Front-end development</h3>
+                <p class="tool-description">Complete Web front end developing with beautification.</p>
+                <div class="tool-rating">
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                </div>
+                <ul class="features-list">
+                    <li><i class='bx bx-check'></i> HTML&CSS</li>
+                    <li><i class='bx bx-check'></i> Vue.js</li>
+                    <li><i class='bx bx-check'></i> Javascript</li>
+                    <li><i class='bx bx-check'></i> Reactjs</li>
+                </ul>
+                <div class="tool-price">$249.99-Depends</div>
+                <button 
+  class="buy-btn mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600" 
+  onclick="window.location.href='mailto:frederickabraham547@gmail.com?subject=Web%20Service&body=I%20am%20interested%20in%20purchasing%20the%20Resume%20Website.'">Order Now</button>
+                
+            </div>
+
+            <div class="tool-card">
+                <img src="https://picsum.photos/2200/2000?random=3" alt="Resume website" class="tool-image">
+                <h3 class="tool-title">Resume website</h3>
+                <p class="tool-description">Create a professional online resume to attract employers.</p>
+                <div class="tool-rating">
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star star'></i>
+                    <i class='bx bxs-star-half star'></i>
+                </div>
+                <ul class="features-list">
+                    <li><i class='bx bx-check'></i> Multi-platform Support</li>
+                    <li><i class='bx bx-check'></i> Download able PDF resume</li>
+                    <li><i class='bx bx-check'></i> Contact Form</li>
+                    <li><i class='bx bx-check'></i> Skill chart</li>
+                </ul>
+                <div class="tool-price">$179.99-Depends</div>
+                <button 
+  class="buy-btn mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600" 
+  onclick="window.location.href='mailto:frederickabraham547@gmail.com?subject=Web%20Service&body=I%20am%20interested%20in%20purchasing%20the%20Resume%20Website.'">Order Now</button>
+            </div>
+            
+            <div class="tool-card">
+    <img src="https://picsum.photos/2200/2000?random=4" alt="Blog Templates" class="tool-image">
+    <h3 class="tool-title">Blog Templates</h3>
+    <p class="tool-description">Beautiful blogging templates for writers and content creators.</p>
+    <div class="tool-rating">
+        <i class='bx bxs-star star'></i>
+        <i class='bx bxs-star star'></i>
+        <i class='bx bxs-star star'></i>
+        <i class='bx bxs-star star'></i>
+        <i class='bx bxs-star star'></i>
+    </div>
+    <ul class="features-list">
+        <li><i class='bx bx-check'></i> Comment sections</li>
+        <li><i class='bx bx-check'></i> Category filters</li>
+        <li><i class='bx bx-check'></i> Customizable theme</li>
+    </ul>
+    <div class="tool-price">$199.99-Depends</div>
+    <button 
+  class="buy-btn mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600" 
+  onclick="window.location.href='mailto:frederickabraham547@gmail.com?subject=Web%20Service%20Editor&body=I%20am%20interested%20in%20purchasing%20the%20Blog%20Templates.'"> Order Now</button>
+  
+  <button 
+        class="buy-btn mt-4 inline-block bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600" 
+        onclick="window.open('./demo/live-demo.html', '_blank')">
+        Live Demo
+    </button>
+</div>
+
+<div class="tool-card">
+    <img src="https://picsum.photos/2200/2000?random=5" alt="Personal landing page" class="tool-image">
+    <h3 class="tool-title">Personal Landing page</h3>
+    <p class="tool-description">Simple, elegant pages to introduce yourself or a product.</p>
+    <div class="tool-rating">
+        <i class='bx bxs-star star'></i>
+        <i class='bx bxs-star star'></i>
+        <i class='bx bxs-star star'></i>
+        <i class='bx bxs-star star'></i>
+        <i class='bx bx-star star'></i>
+    </div>
+    <ul class="features-list">
+        <li><i class='bx bx-check'></i> Call-To-Action button</li>
+        <li><i class='bx bx-check'></i> Animations</li>
+        <li><i class='bx bx-check'></i> Email subscription form</li>
+    </ul>
+    <div class="tool-price">$99.99-Depends</div>
+    <button 
+  class="buy-btn mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600" 
+  onclick="window.location.href='mailto:frederickabraham547@gmail.com?subject=Web%20Service%20Editor&body=I%20am%20interested%20in%20purchasing%20the%20Advance%20Proxy%20Management.'">
+  Order Now
+</button>
+
+<button 
+        class="buy-btn mt-4 inline-block bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600" 
+        onclick="window.open('./demo/#', '_blank')">
+        Live Demo
+    </button> 
+</div>
+
+<div class="tool-card">
+    <img src="https://picsum.photos/2200/2000?random=6" alt="Corporate website template" class="tool-image">
+    <h3 class="tool-title">Corporate website template</h3>
+    <p class="tool-description">Professional designs for businesses of any size.</p>
+    <div class="tool-rating">
+        <i class='bx bxs-star star'></i>
+        <i class='bx bxs-star star'></i>
+        <i class='bx bxs-star star'></i>
+        <i class='bx bxs-star star'></i>
+        <i class='bx bx-star star'></i>
+    </div>
+    <ul class="features-list">
+        <li><i class='bx bx-check'></i> Service showcase</li>
+        <li><i class='bx bx-check'></i> About us page</li>
+        <li><i class='bx bx-check'></i> Team profiles</li>
+        <li><i class='bx bx-check'></i> Testimonials</li>
+    </ul>
+    <div class="tool-price">$349.99-Depends</div>
+    <button 
+        class="buy-btn mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 mb-2" 
+        onclick="window.location.href='mailto:frederickabraham547@gmail.com?subject=Web%20Service%20Editor&body=I%20am%20interested%20in%20purchasing%20the%20XSS%20Protection%20Suite.'">
+        Order Now
+    </button>
+    
+    <!-- Updated Live Demo Button -->
+    <button 
+        class="buy-btn mt-4 inline-block bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600" 
+        onclick="window.open('.demo/corporate.html', '_blank')">
+        Live Demo
+    </button>
+</div>
+</div>
+
+<div class="tool-card">
+    <img src="https://picsum.photos/2200/2000?random=6" alt="Corporate website template" class="tool-image">
+    <h3 class="tool-title">Small business site</h3>
+    <p class="tool-description">Ideal for startups and local businesses.</p>
+    <div class="tool-rating">
+        <i class='bx bxs-star star'></i>
+        <i class='bx bxs-star star'></i>
+        <i class='bx bxs-star star'></i>
+        <i class='bx bxs-star star'></i>
+        <i class='bx bx-star star'></i>
+    </div>
+    <ul class="features-list">
+        <li><i class='bx bx-check'></i> Service booking forms</li>
+        <li><i class='bx bx-check'></i> Map integration</li>
+        <li><i class='bx bx-check'></i> Contact form</li>
+        <li><i class='bx bx-check'></i> Service advertising</li>
+    </ul>
+    <div class="tool-price">$349.99-Depends</div>
+    <button 
+  class="buy-btn mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600" 
+  onclick="window.location.href='mailto:frederickabraham547@gmail.com?subject=Web%20Service%20Editor&body=I%20am%20interested%20in%20purchasing%20the%20XSS%20Protection%20Suite.'">
+  Order Now
+</button>
+
+<button 
+        class="buy-btn mt-4 inline-block bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600" 
+        onclick="window.open('./demo/#', '_blank')">
+        Live Demo
+    </button>
+</div>
+
+<div class="tool-card">
+    <img src="https://picsum.photos/2200/2000?random=6" alt="Corporate website template" class="tool-image">
+    <h3 class="tool-title">Real-estate website template</h3>
+    <p class="tool-description">Real estate listings with advanced search and filters.</p>
+    <div class="tool-rating">
+        <i class='bx bxs-star star'></i>
+        <i class='bx bxs-star star'></i>
+        <i class='bx bxs-star star'></i>
+        <i class='bx bxs-star star'></i>
+        <i class='bx bxs-star-half star'></i>
+    </div>
+    <ul class="features-list">
+        <li><i class='bx bx-check'></i> Property Gallery</li>
+        <li><i class='bx bx-check'></i> Map integration</li>
+        <li><i class='bx bx-check'></i> Inquiry form</li>
+    </ul>
+    <div class="tool-price">$499.99-Depends</div>
+    <button 
+  class="buy-btn mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600" 
+  onclick="window.location.href='mailto:frederickabraham547@gmail.com?subject=Web%20Service%20Editor&body=I%20am%20interested%20in%20purchasing%20the%20XSS%20Protection%20Suite.'">
+  Order Now
+</button>
+
+<button 
+        class="buy-btn mt-4 inline-block bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600" 
+        onclick="window.open('./demo/#', '_blank')">
+        Live Demo
+    </button>
+</div>
+
+<div class="tool-card">
+    <img src="https://picsum.photos/2200/2000?random=6" alt="Corporate website template" class="tool-image">
+    <h3 class="tool-title">Restaurant/Cafe Websites</h3>
+    <p class="tool-description">Showcase your menu, services, and booking options.</p>
+    <div class="tool-rating">
+        <i class='bx bxs-star star'></i>
+        <i class='bx bxs-star star'></i>
+        <i class='bx bxs-star star'></i>
+        <i class='bx bxs-star star'></i>
+        <i class='bx bx-star star'></i>
+    </div>
+    <ul class="features-list">
+        <li><i class='bx bx-check'></i> Online reservation</li>
+        <li><i class='bx bx-check'></i> Menu display</li>
+        <li><i class='bx bx-check'></i> Reviews</li>
+        <li><i class='bx bx-check'></i> Food listing gallery</li>
+    </ul>
+    <div class="tool-price">$299.99-Depends</div>
+    <button 
+  class="buy-btn mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600" 
+  onclick="window.location.href='mailto:frederickabraham547@gmail.com?subject=Web%20Service%20Editor&body=I%20am%20interested%20in%20purchasing%20the%20XSS%20Protection%20Suite.'">
+  Order Now
+</button>
+
+<button 
+        class="buy-btn mt-4 inline-block bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600" 
+        onclick="window.open('./demo/#', '_blank')">
+        Live Demo
+    </button>
+</div>
+
+<div class="tool-card">
+    <img src="https://picsum.photos/2200/2000?random=6" alt="Corporate website template" class="tool-image">
+    <h3 class="tool-title">Dropshipping Websites</h3>
+    <p class="tool-description">Perfect for starting a dropshipping business.</p>
+    <div class="tool-rating">
+        <i class='bx bxs-star star'></i>
+        <i class='bx bxs-star star'></i>
+        <i class='bx bxs-star star'></i>
+        <i class='bx bxs-star star'></i>
+        <i class='bx bx-star star'></i>
+    </div>
+    <ul class="features-list">
+        <li><i class='bx bx-check'></i> Product import tools</li>
+        <li><i class='bx bx-check'></i> Order management</li>
+        <li><i class='bx bx-check'></i> Custom branding</li>
+        <li><i class='bx bx-check'></i> Service advertising</li>
+    </ul>
+    <div class="tool-price">$299.99-Depends</div>
+    <button 
+  class="buy-btn mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600" 
+  onclick="window.location.href='mailto:frederickabraham547@gmail.com?subject=Web%20Service%20Editor&body=I%20am%20interested%20in%20purchasing%20the%20XSS%20Protection%20Suite.'">
+  Order Now
+</button>
+
+<button 
+        class="buy-btn mt-4 inline-block bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600" 
+        onclick="window.open('demo.html/watches.html', '_blank')">
+        Live Demo
+    </button>
+</div>
+
+<div class="tool-card">
+    <img src="https://picsum.photos/2200/2000?random=6" 
+         alt="Custom website design template" 
+         class="tool-image" loading="lazy">
+    <h3 class="tool-title">SaaS website</h3>
+    <p class="tool-description">
+        A modern website template for software-as-a-service companies to showcase their products.
+    </p>
+    <div class="tool-rating" aria-label="4 out of 5 stars">
+        <i class="bx bxs-star star"></i>
+        <i class="bx bxs-star star"></i>
+        <i class="bx bxs-star star"></i>
+        <i class="bx bxs-star star"></i>
+        <i class="bx bx-star star"></i>
+    </div>
+    <ul class="features-list">
+        <li><i class="bx bx-check"></i> Product feature highlights and demo request forms</li>
+        <li><i class="bx bx-check"></i> Pricing tables with subscription options</li>
+        <li><i class="bx bx-check"></i> Case studies and customer testimonials</li>
+        <li><i class="bx bx-check"></i> Integration with CRM and email marketing tools</li>
+    </ul>
+    <div class="tool-price">Depends</div>
+    <button class="buy-btn" onclick="sendEmail('Saas Website')">Order Now</button>
+</div>
+
+<div class="tool-card">
+    <img src="https://picsum.photos/2200/2000?random=6" 
+         alt="Custom website design template" 
+         class="tool-image" loading="lazy">
+    <h3 class="tool-title">Custom Website</h3>
+    <p class="tool-description">
+        Describe any website of your choice, and we’ll get to work.
+    </p>
+    <div class="tool-rating" aria-label="4 out of 5 stars">
+        <i class="bx bxs-star star"></i>
+        <i class="bx bxs-star star"></i>
+        <i class="bx bxs-star star"></i>
+        <i class="bx bxs-star star"></i>
+        <i class="bx bx-star star"></i>
+    </div>
+    <ul class="features-list">
+        <li><i class="bx bx-check"></i> Any described features of your choice</li>
+        <li><i class="bx bx-check"></i> Any styling of your choice</li>
+        <li><i class="bx bx-check"></i> Any animation of your choice</li>
+        <li><i class="bx bx-check"></i> Hosting services included</li>
+    </ul>
+    <div class="tool-price">Depends</div>
+    <button class="buy-btn" onclick="sendEmail('Custom website')">Purchase Now</button>
+</div>
+
+        </div>
+    </main>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            const icon = themeToggle.querySelector('i');
+            if (body.classList.contains('light-mode')) {
+                icon.classList.remove('bx-moon');
+                icon.classList.add('bx-sun');
+            } else {
+                icon.classList.remove('bx-sun');
+                icon.classList.add('bx-moon');
+            }
+        });
+
+        // Add smooth scroll animation for cards
+        const cards = document.querySelectorAll('.tool-card');
+        window.addEventListener('scroll', () => {
+            cards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                if (cardTop < windowHeight * 0.8) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }
+            });
+        });
+    </script>
+    
+    <script>
+   function sendEmail(toolName) {
+            window.location.href = `mailto:frederickabraham547@gmail.com?subject=${encodeURIComponent(toolName)}&body=I%20am%20interested%20in%20the%20${encodeURIComponent(toolName)}%20Developing.`;
+        }
+  </script>
+</body>
+</html>
