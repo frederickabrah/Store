@@ -1,0 +1,285 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Delicious Recipes
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet"/>
+  <style>
+   body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+        .header {
+            position: relative;
+            text-align: center;
+            color: white;
+        }
+        .header img {
+            width: 100%;
+            height: auto;
+        }
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .header-content h1 {
+            font-size: 3em;
+            margin: 0;
+        }
+        .header-content p {
+            font-size: 1.5em;
+            margin: 10px 0;
+        }
+        .header-content .btn {
+            background-color: #ff4b2b;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+        }
+        .top-dishes {
+            text-align: center;
+            padding: 50px 20px;
+        }
+        .top-dishes h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        .gallery {
+            position: relative;
+            width: 80%;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        .dishes {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .dish {
+            min-width: 200px;
+            margin: 10px;
+            text-align: center;
+        }
+        .dish img {
+            width: 200px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .dish p {
+            margin-top: 10px;
+            font-size: 1em;
+        }
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .arrow-left {
+            left: 0;
+        }
+        .arrow-right {
+            right: 0;
+        }
+        .card {
+            background-color: #f9f9f9;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .card h3 {
+            margin-top: 0;
+        }
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2em;
+            }
+            .header-content p {
+                font-size: 1em;
+            }
+            .header-content .btn {
+                font-size: 1em;
+            }
+            .dish img {
+                width: 150px;
+                height: 100px;
+            }
+        }
+  </style>
+ </head>
+ <body>
+  <div class="header">
+   <img alt="Wooden table with salad bowl and wooden spoons" height="600" src="https://storage.googleapis.com/a1aa/image/zdQN9xP5ujqiIJPInIuvJ6qy55PdqelbvvCjGh0uQVfRRq4TA.jpg" width="1200"/>
+   <div class="header-content" data-aos="fade-up">
+    <h1>
+     Delicious Recipes
+    </h1>
+    <p>
+     Find Your Next Great Dish
+    </p>
+    <a class="btn" href="#">
+     Get Started
+    </a>
+   </div>
+  </div>
+  <div class="top-dishes" data-aos="fade-up">
+   <h2>
+    Our Top Rated Dishes
+   </h2>
+   <div class="gallery">
+    <button class="arrow arrow-left" onclick="moveLeft()">
+     <i class="fas fa-chevron-left">
+     </i>
+    </button>
+    <div class="dishes" id="dishes">
+     <div class="dish" data-aos="zoom-in">
+      <img alt="Dish 1" height="150" src="https://storage.googleapis.com/a1aa/image/kPPFte6j3a1EaqxUfv1yT9U815MQTzs3pKj9CUmQ4llTRq4TA.jpg" width="200"/>
+      <p>
+       Dish 1
+      </p>
+     </div>
+     <div class="dish" data-aos="zoom-in">
+      <img alt="Dish 2" height="150" src="https://storage.googleapis.com/a1aa/image/HEOAUuoEtnosMt2jfLY32oicNX2Jept5feinUICQclaQFpiPB.jpg" width="200"/>
+      <p>
+       Dish 2
+      </p>
+     </div>
+     <div class="dish" data-aos="zoom-in">
+      <img alt="Dish 3" height="150" src="https://storage.googleapis.com/a1aa/image/V7cPGdHe3FWepkvA9jxDLfXyXFKKnELPQNTyy05TfGHAFpiPB.jpg" width="200"/>
+      <p>
+       Dish 3
+      </p>
+     </div>
+     <div class="dish" data-aos="zoom-in">
+      <img alt="Dish 4" height="150" src="https://storage.googleapis.com/a1aa/image/H5eeClVu6nhuo0AaK3NCJq5w1wFFRjuv3de9eAH3qNIwJpiPB.jpg" width="200"/>
+      <p>
+       Dish 4
+      </p>
+     </div>
+     <div class="dish" data-aos="zoom-in">
+      <img alt="Dish 5" height="150" src="https://storage.googleapis.com/a1aa/image/v6s8xzelLUzFJqx7UTJw9j1kgNssU4uMyggGXN9MtfBiSq4TA.jpg" width="200"/>
+      <p>
+       Dish 5
+      </p>
+     </div>
+     <div class="dish" data-aos="zoom-in">
+      <img alt="Dish 6" height="150" src="https://storage.googleapis.com/a1aa/image/nIUR7HdSw66nDxlk2BqwwAFuuAfyyNW9OQF7ipfyAGrekUxnA.jpg" width="200"/>
+      <p>
+       Dish 6
+      </p>
+     </div>
+     <div class="dish" data-aos="zoom-in">
+      <img alt="Dish 7" height="150" src="https://storage.googleapis.com/a1aa/image/bzsIDc07CpY7KRCjb5tEjpkOnt07XgnzjUiBLEgUYgeRJV8JA.jpg" width="200"/>
+      <p>
+       Dish 7
+      </p>
+     </div>
+     <div class="dish" data-aos="zoom-in">
+      <img alt="Dish 8" height="150" src="https://storage.googleapis.com/a1aa/image/HcWrs1IzI1IPD5dt4UbfkLFhrQE8wzQXLFv1qE27A7XSJV8JA.jpg" width="200"/>
+      <p>
+       Dish 8
+      </p>
+     </div>
+     <div class="dish" data-aos="zoom-in">
+      <img alt="Dish 9" height="150" src="https://storage.googleapis.com/a1aa/image/MfHlqhCh2201XSHvXFv1uYeTq0ciXLey2Zk8O16d8kPLlUxnA.jpg" width="200"/>
+      <p>
+       Dish 9
+      </p>
+     </div>
+     <div class="dish" data-aos="zoom-in">
+      <img alt="Dish 10" height="150" src="https://storage.googleapis.com/a1aa/image/Z0bVcPiCqRb4DZMiBZfMV2Tak9fZCJXLaHaG2c6LWETmSq4TA.jpg" width="200"/>
+      <p>
+       Dish 10
+      </p>
+     </div>
+     <div class="dish" data-aos="zoom-in">
+      <img alt="Dish 11" height="150" src="https://storage.googleapis.com/a1aa/image/H9D519xfk4SRXSyV20K6yIhkudYN9ItQcNBZKLwTPlsPJV8JA.jpg" width="200"/>
+      <p>
+       Dish 11
+      </p>
+     </div>
+     <div class="dish" data-aos="zoom-in">
+      <img alt="Dish 12" height="150" src="https://storage.googleapis.com/a1aa/image/HKKhF8oXIfXDe0ro8mi8Ch8cfwq5X95fT1msTMoWne6DUSFfE.jpg" width="200"/>
+      <p>
+       Dish 12
+      </p>
+     </div>
+     <div class="dish" data-aos="zoom-in">
+      <img alt="Dish 13" height="150" src="https://storage.googleapis.com/a1aa/image/Dt7THftmQt0HeUEe9MCf6NTj8r3jewq8PJ43e9s5lZZTnkKeJA.jpg" width="200"/>
+      <p>
+       Dish 13
+      </p>
+     </div>
+    </div>
+    <button class="arrow arrow-right" onclick="moveRight()">
+     <i class="fas fa-chevron-right">
+     </i>
+    </button>
+   </div>
+  </div>
+  <div class="card" data-aos="fade-up">
+   <h3>
+    About Us
+   </h3>
+   <p>
+    Welcome to Delicious Recipes! We are passionate about bringing you the best recipes from around the world. Our team of culinary experts works tirelessly to curate and create dishes that will delight your taste buds and inspire your cooking adventures.
+   </p>
+  </div>
+  <div class="card" data-aos="fade-up">
+   <h3>
+    Contact Us
+   </h3>
+   <p>
+    Have any questions or feedback? We'd love to hear from you! Reach out to us at:
+   </p>
+   <p>
+    Email: info@deliciousrecipes.com
+   </p>
+   <p>
+    Phone: (123) 456-7890
+   </p>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js">
+  </script>
+  <script>
+   AOS.init();
+
+        let currentIndex = 0;
+        const dishes = document.getElementById('dishes');
+        const dishCount = dishes.children.length;
+        const dishWidth = dishes.children[0].offsetWidth + 20; // 20px margin
+
+        function moveLeft() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateGallery();
+            }
+        }
+
+        function moveRight() {
+            if (currentIndex < dishCount - 1) {
+                currentIndex++;
+                updateGallery();
+            }
+        }
+
+        function updateGallery() {
+            dishes.style.transform = `translateX(-${currentIndex * dishWidth}px)`;
+        }
+  </script>
+ </body>
+</html>

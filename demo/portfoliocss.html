@@ -1,0 +1,224 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Personal Portfolio
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .navbar a {
+            text-decoration: none;
+            color: #333;
+            margin: 0 15px;
+            font-weight: 500;
+        }
+        .navbar a.logo {
+            font-weight: 700;
+            color: #ff00ff;
+        }
+        .hero {
+            position: relative;
+            text-align: center;
+            color: white;
+        }
+        .hero img {
+            width: 100%;
+            height: 100vh;
+            object-fit: cover;
+        }
+        .hero-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .hero-text h1 {
+            font-size: 50px;
+            margin: 0;
+        }
+        .hero-text h1 span {
+            color: #ff00ff;
+        }
+        .hero-text p {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+        .hero-text a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #ff00ff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .about, .samples, .contact {
+            padding: 50px;
+            text-align: center;
+        }
+        .about h2, .samples h2, .contact h2 {
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+        .about p, .samples p, .contact p {
+            font-size: 18px;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .about img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 50%;
+            margin-top: 30px;
+        }
+        .samples img {
+            width: 100%;
+            max-width: 300px;
+            margin: 20px;
+            transition: transform 0.3s;
+        }
+        .samples img:hover {
+            transform: scale(1.1);
+        }
+        .contact form {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .contact form input, .contact form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .contact form button {
+            padding: 10px 20px;
+            background-color: #ff00ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 20px;
+            }
+            .navbar a {
+                margin: 10px 0;
+            }
+            .hero-text h1 {
+                font-size: 30px;
+            }
+            .hero-text p {
+                font-size: 16px;
+            }
+            .about, .samples, .contact {
+                padding: 20px;
+            }
+            .about h2, .samples h2, .contact h2 {
+                font-size: 24px;
+            }
+            .about p, .samples p, .contact p {
+                font-size: 16px;
+            }
+        }
+  </style>
+ </head>
+ <body>
+  <div class="navbar">
+   <a class="logo" href="#">
+    LOGO
+   </a>
+   <div>
+    <a href="#">
+     Home
+    </a>
+    <a href="#">
+     About
+    </a>
+    <a href="#">
+     Services
+    </a>
+    <a href="#">
+     Portfolio
+    </a>
+    <a href="#">
+     Contact
+    </a>
+   </div>
+  </div>
+  <div class="hero">
+   <img alt="Background image of a person sitting on a dock overlooking a lake and mountains" height="1080" src="https://storage.googleapis.com/a1aa/image/dvPbGrHVyKqfA66G5c3r9aVacZ77jeZV0h2Xrtd2GHOjCq4TA.jpg" width="1920"/>
+   <div class="hero-text">
+    <h1>
+     HI, I AM
+     <span>
+      BROWNY
+     </span>
+     STAR
+    </h1>
+    <p>
+     WEB DESIGNER AND WEB DEVELOPER
+    </p>
+    <a href="#">
+     Download Resume
+    </a>
+   </div>
+  </div>
+  <div class="about">
+   <h2>
+    ABOUT ME
+   </h2>
+   <p>
+    I am a Professional UX/UI Designer and Web developer. I create modern and responsive web designs. I am passionate about creating beautiful and functional user experiences.
+   </p>
+   <img alt="Profile picture of Browny Star" height="300" src="https://storage.googleapis.com/a1aa/image/o3aLRod8I65BIxiEOetMre7z6KeIHDpEBdVqcDhlwYIFFUxnA.jpg" width="300"/>
+  </div>
+  <div class="samples">
+   <h2>
+    MY SAMPLES
+   </h2>
+   <p>
+    Here are some of my recent works.
+   </p>
+   <img alt="Sample project 1" height="200" src="https://storage.googleapis.com/a1aa/image/mOHnjNALZX5eUKQ4XnbVZZkWUWIi8Evcg9mc8eCQ6KqxEq4TA.jpg" width="300"/>
+   <img alt="Sample project 2" height="200" src="https://storage.googleapis.com/a1aa/image/HAT7dM1FxEacIFxxqZ7FrV4T49qAvPOuqyPTiY1dTGIMhKeJA.jpg" width="300"/>
+   <img alt="Sample project 3" height="200" src="https://storage.googleapis.com/a1aa/image/PbsvU28JfDxyHqKutZTwjCa0szg0NpSp1d9psWxi0UtZCV8JA.jpg" width="300"/>
+  </div>
+  <div class="contact">
+   <h2>
+    CONTACT US
+   </h2>
+   <p>
+    Feel free to reach out to me for any project or collaboration.
+   </p>
+   <form>
+    <input name="name" placeholder="Your Name" type="text"/>
+    <input name="email" placeholder="Your Email" type="email"/>
+    <textarea name="message" placeholder="Your Message" rows="5">
+    </textarea>
+    <button type="submit">
+     Send Message
+    </button>
+   </form>
+  </div>
+ </body>
+</html>

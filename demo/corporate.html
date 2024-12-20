@@ -1,0 +1,304 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   SinisterX - Digital Tools, Web Development, and Cyber Security
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+        .navbar {
+            background-color: #1a1a2e;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+        .navbar .logo img {
+            height: 40px;
+        }
+        .navbar .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        .navbar .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+        }
+        .navbar .contact-btn {
+            background-color: #ff7f00;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .hero {
+            background-color: #1a1a2e;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+        }
+        .hero h1 {
+            font-size: 2.5em;
+            margin: 0;
+        }
+        .hero .cta-btn {
+            background-color: #ff7f00;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 1em;
+        }
+        .hero .cta-btn:hover {
+            background-color: #e66b00;
+        }
+        .hero .watch-video {
+            display: block;
+            margin-top: 20px;
+            color: white;
+            text-decoration: none;
+            font-size: 1em;
+        }
+        .content {
+            background-color: white;
+            padding: 50px 20px;
+            text-align: center;
+        }
+        .content .icon {
+            font-size: 3em;
+            color: #ff7f00;
+        }
+        .content .description {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+        .services, .about-us, .team, .testimonials, .contact-us {
+            padding: 50px 20px;
+            text-align: center;
+        }
+        .services h2, .about-us h2, .team h2, .testimonials h2, .contact-us h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        .services .service-item, .team .team-member, .testimonials .testimonial-item {
+            margin-bottom: 20px;
+        }
+        .services .service-item img, .team .team-member img, .testimonials .testimonial-item img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+        .services .service-item h3, .team .team-member h3, .testimonials .testimonial-item h3 {
+            font-size: 1.5em;
+            margin: 10px 0;
+        }
+        .services .service-item p, .team .team-member p, .testimonials .testimonial-item p {
+            font-size: 1em;
+            color: #666;
+        }
+        .contact-us form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .contact-us form input, .contact-us form textarea {
+            width: 100%;
+            max-width: 500px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .contact-us form button {
+            background-color: #ff7f00;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        @media (max-width: 768px) {
+            .navbar .nav-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .hero h1 {
+                font-size: 2em;
+            }
+            .hero .cta-btn {
+                font-size: 0.9em;
+            }
+        }
+  </style>
+ </head>
+ <body>
+  <header class="navbar">
+   <div class="logo">
+    <img alt="SinisterX Logo" height="40" src="https://storage.googleapis.com/a1aa/image/TBbZ1CltV8pjOJO9oDD7roELSg5InsHL8WB4SffdmkbNpq4TA.jpg" width="40"/>
+   </div>
+   <nav class="nav-links">
+    <a href="#">
+     Home
+    </a>
+    <a href="#">
+     About Us
+    </a>
+    <a href="#">
+     Services
+    </a>
+    <a href="#">
+     Team
+    </a>
+    <a href="#">
+     Testimonials
+    </a>
+    <a href="#">
+     Contact
+    </a>
+   </nav>
+   <button class="contact-btn">
+    Contact
+   </button>
+  </header>
+  <section class="hero">
+   <h1>
+    Best secure investment plan
+   </h1>
+   <button class="cta-btn">
+    Get Started
+   </button>
+   <a class="watch-video" href="#">
+    Watch Video
+   </a>
+  </section>
+  <section class="services">
+   <h2>
+    Our Services
+   </h2>
+   <div class="service-item">
+    <img alt="Digital Tools" height="100" src="https://storage.googleapis.com/a1aa/image/5nCRUgl40ey5eEQIotwiDxDFTeHOVQff90RR28rMDTkYUVFfE.jpg" width="100"/>
+    <h3>
+     Digital Tools
+    </h3>
+    <p>
+     We provide a range of digital tools to enhance your business productivity and efficiency.
+    </p>
+   </div>
+   <div class="service-item">
+    <img alt="Web Development" height="100" src="https://storage.googleapis.com/a1aa/image/BJMn7Dtz0S49CRttqeewnnS4nzxeFF73rDRiiQeRtF19pqiPB.jpg" width="100"/>
+    <h3>
+     Web Development
+    </h3>
+    <p>
+     Our expert team develops high-quality websites tailored to your business needs.
+    </p>
+   </div>
+   <div class="service-item">
+    <img alt="Cyber Security" height="100" src="https://storage.googleapis.com/a1aa/image/iGaACl1uXhLvCF6VYzeclb9u54reMMjPm8bEGymlNHwZqq4TA.jpg" width="100"/>
+    <h3>
+     Cyber Security
+    </h3>
+    <p>
+     We offer top-notch cyber security solutions to protect your business from online threats.
+    </p>
+   </div>
+  </section>
+  <section class="about-us">
+   <h2>
+    About Us
+   </h2>
+   <p>
+    SinisterX is a leading IT company specializing in digital tools, web development, and cyber security. Our mission is to provide innovative solutions that help businesses thrive in the digital age. We are committed to delivering high-quality services and ensuring customer satisfaction.
+   </p>
+  </section>
+  <section class="team">
+   <h2>
+    Our Team
+   </h2>
+   <div class="team-member">
+    <img alt="John Doe" height="100" src="https://storage.googleapis.com/a1aa/image/gqKPwTVLcNIkNJnkwVEVdz5qk5aOE6XoLDSSczUvKWnoqKeJA.jpg" width="100"/>
+    <h3>
+     Abraham Frederick
+    </h3>
+    <p>
+     CEO
+    </p>
+   </div>
+   <div class="team-member">
+    <img alt="Jane Smith" height="100" src="https://storage.googleapis.com/a1aa/image/eOhroeGSqNo2E0taqeoeBg1oYEw5aBhAi66UHSeBL2CXTVFfE.jpg" width="100"/>
+    <h3>
+     Angel Frederick
+    </h3>
+    <p>
+     CTO
+    </p>
+   </div>
+   <div class="team-member">
+    <img alt="Michael Brown" height="100" src="https://storage.googleapis.com/a1aa/image/WTA5ElmwLOaefEOBeRf2PmnIhK2I1opYT7gJJ1cY1m1jpqiPB.jpg" width="100"/>
+    <h3>
+     Jonathan Frederick
+    </h3>
+    <p>
+     Lead Developer
+    </p>
+   </div>
+  </section>
+  <section class="testimonials">
+   <h2>
+    Testimonials
+   </h2>
+   <div class="testimonial-item">
+    <img alt="Client 1" height="100" src="https://storage.googleapis.com/a1aa/image/raMhntinnirebKM81kfh949BSG83fZ3NfASmizNBgj6GqqiPB.jpg" width="100"/>
+    <h3>
+     Sarah Kate
+    </h3>
+    <p>
+     "SinisterX provided us with exceptional web development services. Our website looks amazing and functions perfectly. Highly recommend!"
+    </p>
+   </div>
+   <div class="testimonial-item">
+    <img alt="Client 2" height="100" src="https://storage.googleapis.com/a1aa/image/8LsZ0UgF4PJNLpxjLyfLmTO4fDgMGBaKyaHAepbTn8b8UVxnA.jpg" width="100"/>
+    <h3>
+     David Lee
+    </h3>
+    <p>
+     "The digital tools from SinisterX have significantly improved our business operations. Their team is professional and responsive."
+    </p>
+   </div>
+   <div class="testimonial-item">
+    <img alt="Client 3" height="100" src="https://storage.googleapis.com/a1aa/image/wiNjiuU2XU4zKhzfRmsFozMzfRcRjcOfLATyO2sEXb85UVxnA.jpg" width="100"/>
+    <h3>
+     Emily Davis
+    </h3>
+    <p>
+     "We are extremely satisfied with the cyber security solutions provided by SinisterX. They have helped us secure our data and protect our business."
+    </p>
+   </div>
+  </section>
+  <section class="contact-us">
+   <h2>
+    Contact Us
+   </h2>
+   <form>
+    <input name="name" placeholder="Your Name" required="" type="text"/>
+    <input name="email" placeholder="Your Email" required="" type="email"/>
+    <textarea name="message" placeholder="Your Message" required="">
+    </textarea>
+    <button type="submit">
+     Send Message
+    </button>
+   </form>
+  </section>
+ </body>
+</html>
